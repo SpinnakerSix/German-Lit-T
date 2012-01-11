@@ -1,0 +1,3 @@
+MAILTO=hanqijing@gmail.com
+* * * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
+
