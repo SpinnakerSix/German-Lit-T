@@ -7,6 +7,7 @@
 
 require '/home/bitnami/tbot'
 
+
 # list_of_words will be in this format
 #list_of_words = [
 #["abreviate", "abbreviate"],
@@ -14,12 +15,15 @@ require '/home/bitnami/tbot'
 #["beleive", "believe"],
 #]
 
+
 def parse_wordlist(n)
   l = []
   f = File.open(n, 'r')
   f.each do |wordpair|
-    wordpair = wordpair.strip.split(', ')
-    l << wordpair
+    if wordpair[0] != '#'
+      wordpair = wordpair.strip.split(', ')
+      l << wordpair
+    end
   end  
   f.close
   #puts l
@@ -67,8 +71,21 @@ def get_english(json_file, client, word)
   list = []
   json_file = json_file['results']
   json_file.each do |status|
+    if status['text'][0..1] == "RT"
+      next
+    else 
       puts status['text']
-      post_correction(status['from_user'] ,word, client)
+      begin    
+        post_correction(status['from_user'] ,word, client)
+      rescue => e 
+        if e.to_s.include?("403")
+          puts e
+          #Process.exit
+        else
+          puts e
+        end
+      end
+    end
   end
   if not json_file[0].nil?
     save_id(json_file[0]['id'], word)
@@ -78,14 +95,14 @@ end
 
 def post_correction(user, word, client)
 
-  begin
-   client.status :post, "@#{user} I think you meant #{word}."
+   client.status :post, "@#{user} I think you meant #{word}. #SpellPolice"
 #  puts "@#{user} I think you meant #{word}."
 #  client.status :post, "Food!"
-  rescue
-  end
 end
 
+f = File.open("word_records/_lastran", 'w')
+f.write(" ")
+f.close
 
 list_of_words = parse_wordlist("wordlist.txt")
 client = My_client.new.bot

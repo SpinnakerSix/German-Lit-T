@@ -6,24 +6,37 @@ gem 'twitter4r'
 require 'twitter'
 require 'twitter/console'
 
+ # Spell Police's Access
+    consumer_key = "joDN99hlWSrAGHdBkYG1Pg"
+    consumer_secret = "fkeijYl6vpvZ0idhxuNKGklItISJALicGhfuxNMtHDg"
 
-    consumer_key = "Fp4A5JL2D7UmFQmkIOHHg"
-    consumer_secret = "j77KXoBpWCBeZ8nvklZ46eNSzUpO90IquDxR5Vwc7Bs"
-
-    access_token = "460085026-yTWvBkpy1JbHmMFltr3pVbYLjfDHONKzps1Etkie"
-    access_secret = "5xeKne1C8GNesWpOWykgwHmtwJam9kOqDFM5QdCU"
+    access_token = "461552116-WeeKKcBqNB0YLAtE0p0BkdL4H4XVu2Wl1je56R2M"
+    access_secret = "qGeVQ24fBNQGcdyuo51LTUsQiAhC3SKqqCR3hEpcrc"
 
 class My_client
 
   @@t = Twitter::Client
   
   def initialize
+    # Spell bee's Acces
+    #key = "Fp4A5JL2D7UmFQmkIOHHg"
+    #secret = "j77KXoBpWCBeZ8nvklZ46eNSzUpO90IquDxR5Vwc7Bs"
 
-    key = "Fp4A5JL2D7UmFQmkIOHHg"
-    secret = "j77KXoBpWCBeZ8nvklZ46eNSzUpO90IquDxR5Vwc7Bs"
+    #token = "460085026-yTWvBkpy1JbHmMFltr3pVbYLjfDHONKzps1Etkie"
+    #token_secret = "5xeKne1C8GNesWpOWykgwHmtwJam9kOqDFM5QdCU"
 
-    token = "460085026-yTWvBkpy1JbHmMFltr3pVbYLjfDHONKzps1Etkie"
-    token_secret = "5xeKne1C8GNesWpOWykgwHmtwJam9kOqDFM5QdCU"
+    #key = "joDN99hlWSrAGHdBkYG1Pg"
+    #secret = "fkeijYl6vpvZ0idhxuNKGklItISJALicGhfuxNMtHDg"
+
+    #token = "461552116-WeeKKcBqNB0YLAtE0p0BkdL4H4XVu2Wl1je56R2M"
+    #token_secret = "qGeVQ24fBNQGcdyuo51LTUsQiAhC3SKqqCR3hEpcrc"
+    
+
+  key = "r22DF13xcawc9z6sz4WjVg"
+    secret = "srSpeADqfvMRH8QDK3wF1pt5YzfX9FWmXZEP9330YI"
+
+    token = "461552116-Luk7cuu49bidiiVgiCYgsMWJlTMnz4ZA1qvz4zQ1"
+    token_secret = "luXDCa6K6zQwwAoCLwKpLm1oDk4OojueiVNz2kI"
   @@t.configure do |conf|
       # App configuration
       conf.application_name = 'Grammer'
