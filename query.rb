@@ -36,19 +36,22 @@ def run_bot(client, list_of_words)
   url = "http://api.twitter.com/1/statuses/public_timeline.json"
   urls = make_urls(list_of_words)
   urls.each do |tmp|
-    url = tmp[0] + "&since_id=#{retrieve_id(tmp[1])}"
+    url_half = tmp[0]
+
+    word = tmp[1]
+    misspelled_word = tmp[2]
+    url = url_half + "&since_id=#{retrieve_id(misspelled_word)}"
     uri = URI(url)
     j = Net::HTTP.get(uri)
     r = JSON.parse(j)
-    word = tmp[1]
-    get_english(r, client, word)  
+    get_english(r, client, word, misspelled_word)  
   end
 end
 
 def make_urls(list_of_words)
   r = []
   list_of_words.each do |pair|
-    r << ["http://search.twitter.com/search.json?q=#{pair[0]}&result_type=recent", pair[1]]
+    r << ["http://search.twitter.com/search.json?q=#{pair[0]}&result_type=recent", pair[0], pair[-1]]
   end
   return r
 end
@@ -66,7 +69,7 @@ def retrieve_id(word)
   return s
 end
 
-def get_english(json_file, client, word)
+def get_english(json_file, client, word, misspelled_word)
 
   list = []
   json_file = json_file['results']
@@ -88,15 +91,15 @@ def get_english(json_file, client, word)
     end
   end
   if not json_file[0].nil?
-    save_id(json_file[0]['id'], word)
+    save_id(json_file[0]['id'], misspelled_word)
   end
   return list
 end
 
 def post_correction(user, word, client)
 
-   client.status :post, "@#{user} I think you meant #{word}. #SpellPolice"
-#  puts "@#{user} I think you meant #{word}."
+#   client.status :post, "@#{user} I think you meant #{word}. #SpellPolice"
+  puts "@#{user} I think you meant #{word}."
 #  client.status :post, "Food!"
 end
 
