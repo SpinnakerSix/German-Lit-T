@@ -7,15 +7,6 @@
 
 require '/home/bitnami/tbot'
 
-
-# list_of_words will be in this format
-#list_of_words = [
-#["abreviate", "abbreviate"],
-#["equiptment", "equipment"],
-#["beleive", "believe"],
-#]
-
-
 def parse_wordlist(n)
   l = []
   f = File.open(n, 'r')
@@ -32,14 +23,12 @@ end
 
 
 def run_bot(client, list_of_words)
-
   url = "http://api.twitter.com/1/statuses/public_timeline.json"
   urls = make_urls(list_of_words)
   urls.each do |tmp|
     url_half = tmp[0]
-
-    word = tmp[1]
-    misspelled_word = tmp[2]
+    word = tmp[2]
+    misspelled_word = tmp[1]
     url = url_half + "&since_id=#{retrieve_id(misspelled_word)}"
     uri = URI(url)
     j = Net::HTTP.get(uri)
@@ -69,16 +58,17 @@ def retrieve_id(word)
   return s
 end
 
-def get_english(json_file, client, word, misspelled_word)
 
+# go through each status
+def get_english(json_file, client, word, misspelled_word)
   list = []
   json_file = json_file['results']
   json_file.each do |status|
     if status['text'][0..1] == "RT"
       next
-    else 
-      puts status['text']
+    elsif status['text'].include?(" #{misspelled_word} ")
       begin    
+        puts status['text']
         post_correction(status['from_user'] ,word, client)
       rescue => e 
         if e.to_s.include?("403")
@@ -88,6 +78,7 @@ def get_english(json_file, client, word, misspelled_word)
           puts e
         end
       end
+
     end
   end
   if not json_file[0].nil?
@@ -98,8 +89,8 @@ end
 
 def post_correction(user, word, client)
 
-#   client.status :post, "@#{user} I think you meant #{word}. #SpellPolice"
-  puts "@#{user} I think you meant #{word}."
+   client.status :post, "@#{user} I think you meant #{word}. #spelling"
+#   puts "@#{user} I think you meant #{word}."
 #  client.status :post, "Food!"
 end
 

@@ -13,9 +13,9 @@ end
 if FileTest.exists?("../wordlist.txt")
   f = File.open("../wordlist.txt", "r")
   f.each do |wordpair|
-    if wordpair[1] != "#"
+    if wordpair[0] != "#"
       wordpair = wordpair.strip.split(", ")
-      make_file(wordpair[1])
+      make_file(wordpair[0])
     end
   end
   f.close 

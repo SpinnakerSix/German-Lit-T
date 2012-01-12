@@ -4,3 +4,4 @@ MAILTO=hanqijing@gmail.com
 */15 15 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
 */15 18 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
 * 19 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
+
