@@ -2,9 +2,9 @@
 
 require 'rubygems'
 gem 'twitter4r'
-
 require 'twitter'
 require 'twitter/console'
+require 'opt/bitnami/twitter_spelling_bot/tbot'
 
  # Spell Police's Access
 class My_client
@@ -12,11 +12,12 @@ class My_client
   @@t = Twitter::Client
   
   def initialize
-    key = "MNzSFNQC2raNCT3alDoR6g"
-    secret = "SymhtRyRMinJHQ01GeNM20L4NtLDzwlBNXa3VYTA"
+    config_hash = configReader('configReader/keys')
+    key = config_hash['key']
+    secret = config_hash['secret']
+    token = config_hash['token']
+    token_secret = config_hash['token_secret']
 
-    token = "463514608-6Gd0oT0iVtINKjgCv84tOuCq0teegaxDCrk8Tip5"
-    token_secret = "BiRENZ14ApwuFyJ8s5mGV7m6XDQUduv07hkJxpa54"
   @@t.configure do |conf|
       # App configuration
       conf.application_name = 'Grammer'

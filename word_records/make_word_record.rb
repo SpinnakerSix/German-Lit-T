@@ -4,10 +4,10 @@
 
 @word_recordsPath = '~/twitter_spelling_bot/word_records/'
 
-@wordlistPath = "~/twitter_spelling_bot/word_records/wordlist.txt"
+@wordlistPath = "../wordlist.txt"
 def make_file(word)
-  if not FileTest.exists?(@word_recordsPath+"#{word}.txt")
-    f = File.new(@word_recordsPath+"#{word}.txt", 'w')
+  if not FileTest.exists?("#{word}.txt")
+    f = File.new("#{word}.txt", 'w')
     f.close
   end
 end

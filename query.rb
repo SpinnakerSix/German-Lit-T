@@ -5,7 +5,7 @@
 # and picks responses based on that
 # 
 
-require '/home/bitnami/tbot'
+require '/home/bitnami/twitter_spelling_bot/tbot'
 
 def parse_wordlist(n)
   l = []
