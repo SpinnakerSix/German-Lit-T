@@ -10,9 +10,10 @@ class My_client
 
   @@t = Twitter::Client
   
+  @@current_path = File.dirname(__FILE__)
   def initialize
     @keydir = '/home/bitnami/'
-    config_hash = configReader('config/keys')
+    config_hash = configReader(@@current_path + '/config/keys')
     key = config_hash['key']
     secret = config_hash['secret']
     token = config_hash['token']

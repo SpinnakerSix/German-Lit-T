@@ -1,4 +1,5 @@
 MAILTO=hanqijing@gmail.com
+#* * * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb >>~/log/cronjob.log
 */15 19 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb
 */15 0 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb
 */15 3 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb

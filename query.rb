@@ -3,11 +3,12 @@
 # this file creates a new bot and mine the search api for mispelled words
 # and picks responses based on that
 # 
-
 require_relative 'tbot'
 require_relative 'config/configReader'
 #require_relative 'tbot'
-@config_hash = configReader('config/stats')
+#require File.join(File.dirname(__FILE__), 'utils' )
+@current_path = File.dirname(__FILE__)
+@config_hash = configReader(@current_path + '/config/stats')
 @@search_limit = @config_hash['search_limit']
 @@tag = @config_hash['tag']
 @@start_point = @config_hash['start_point']
@@ -51,13 +52,13 @@ def make_urls(list_of_words)
 end
 
 def save_id(num, word)
-  f = File.open("word_records/#{word}.txt",'w')
+  f = File.open(@current_path+"/word_records/#{word}.txt",'w')
   f.write(num.to_i + 1)
   f.close
 end
 
 def retrieve_id(word)
-  f= File.open("word_records/#{word}.txt", 'r')
+  f= File.open(@current_path+"/word_records/#{word}.txt", 'r')
   s =  f.read
   f.close
   return s
@@ -81,6 +82,7 @@ def get_english(json_file, client, word, misspelled_word)
     if status['text'][0..1] == "RT"
       next
     elsif status['text'].include?(" #{misspelled_word} ")
+        puts status['text']
         post_correction(status['from_user'] ,word, client)
     end
   end
@@ -90,7 +92,6 @@ end
 
 def post_correction(user, word, client)
    begin    
-     puts status['text']
      client.status :post, "@#{user} I think you meant #{word}. #{@@tag}"
    rescue => e 
      if e.to_s.include?("403")
@@ -104,10 +105,10 @@ def post_correction(user, word, client)
 #  client.status :post, "Food!"
 end
 
-f = File.open("word_records/_lastran", 'w')
+f = File.open(@current_path + "/word_records/_lastran", 'w')
 f.write(" ")
 f.close
 
-list_of_words = parse_wordlist("wordlist.txt")
+list_of_words = parse_wordlist(@current_path + "/wordlist.txt")
 client = My_client.new.bot
 run_bot(client, list_of_words)
