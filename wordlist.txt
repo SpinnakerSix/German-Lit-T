@@ -1,5 +1,7 @@
-mispelled, misspelled
-misspelt, misspelled
+#mispelled, misspelled
+mispelt, misspelt
+mispell, misspell
+mispells, misspells
 #equiptment, equipment
 #beleive, believe
 #abreviate, abbreviate

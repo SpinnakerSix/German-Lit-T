@@ -40,7 +40,7 @@ end
 def make_urls(list_of_words)
   r = []
   list_of_words.each do |pair|
-    r << ["http://search.twitter.com/search.json?q=#{pair[0]}&result_type=recent", pair[0], pair[-1]]
+    r << ["http://search.twitter.com/search.json?q=#{pair[0]}&result_type=recent&&rpp=100", pair[0], pair[-1]]
   end
   return r
 end
@@ -89,7 +89,7 @@ end
 
 def post_correction(user, word, client)
 
-   client.status :post, "@#{user} I think you meant #{word}. #spelling"
+   client.status :post, "@#{user} I think you meant #{word}. #spellpatrol"
 #   puts "@#{user} I think you meant #{word}."
 #  client.status :post, "Food!"
 end
