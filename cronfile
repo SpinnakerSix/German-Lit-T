@@ -1,7 +1,7 @@
 MAILTO=hanqijing@gmail.com
-*/15 9 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
-*/15 12 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
-*/15 15 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
-*/15 18 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
-* 19 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/query.rb
+*/15 19 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb
+*/15 0 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb
+*/15 3 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb
+*/15 6 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb
+* 7 * * * /opt/bitnami/ruby/bin/ruby /home/bitnami/twitter_spelling_bot/query.rb
 
