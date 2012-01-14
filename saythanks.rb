@@ -45,7 +45,7 @@ end
 def make_urls(list_of_words)
   r = []
   list_of_words.each do |pair|
-    r << ["http://search.twitter.com/search.json?q=#{pair[0]}&result_type=recent&&rpp=#{@@search_limit}", pair[0], pair[-1]]
+    r << ["http://search.twitter.com/search.json?q=@spellpolice%20#{pair[0]}&result_type=recent&&rpp=#{@@search_limit}", pair[0], pair[-1]]
   end
   return r
 end
@@ -91,7 +91,7 @@ end
 def post_correction(user, word, client)
    begin    
      puts status['text']
-     client.status :post, "@#{user} I think you meant #{word}. #{@@tag}"
+     client.status :post, "@#{user} You are welcome. #{@@tag}"
    rescue => e 
      if e.to_s.include?("403")
        puts e

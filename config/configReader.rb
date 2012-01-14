@@ -10,15 +10,10 @@ def configReader(file)
       next
     end
 
-    if l.include?(':')
-      tmp = l.strip.split(':')
+    if l.include?(': ')
+      tmp = l.strip.split(': ')
       result[tmp[0]] = tmp[1]
     end
   end
-  puts result
   return result
 end
-
-configReader('keys')
-
-

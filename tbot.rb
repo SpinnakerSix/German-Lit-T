@@ -4,21 +4,21 @@ require 'rubygems'
 gem 'twitter4r'
 require 'twitter'
 require 'twitter/console'
-require 'opt/bitnami/twitter_spelling_bot/tbot'
-
+require_relative 'config/configReader'
  # Spell Police's Access
 class My_client
 
   @@t = Twitter::Client
   
   def initialize
-    config_hash = configReader('configReader/keys')
+    @keydir = '/home/bitnami/'
+    config_hash = configReader('config/keys')
     key = config_hash['key']
     secret = config_hash['secret']
     token = config_hash['token']
     token_secret = config_hash['token_secret']
 
-  @@t.configure do |conf|
+    @@t.configure do |conf|
       # App configuration
       conf.application_name = 'Grammer'
       conf.application_version = '1.0'
@@ -34,7 +34,7 @@ class My_client
     @@token = token
     @@token_secret = token_secret
     @@cfg = @@t.config
-    @@foo = @@t.new(:oauth_access => { :key => @@token, :secret => @@token_secret})
+    @@foo = @@t.new(:oauth_access => { :key => token, :secret => token_secret})
   end
   def foo
     @@foo
